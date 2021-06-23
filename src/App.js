@@ -13,6 +13,7 @@ const responseGoogle =(response)=>{
   setRes( response.profileObj )
 }
 
+console.log( res )
 
   return (
     <div className="App" >
