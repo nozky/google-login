@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React,{ useState } from 'react'
 import './App.css';
+import GoogleLogin from 'react-google-login'
+
+
 
 function App() {
+
+ const [res, setRes] = useState(null)
+
+// googleLogin callback
+const responseGoogle =(response)=>{
+  setRes( response.profileObj )
+}
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" >
+      
+      <h1>Google logIn</h1>
+      
+      <GoogleLogin 
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
+
+      { res? <img src={res.imageUrl} alt={res.imageUrl}/> : <MsgBox msg="No Data"/>}  
+
+      {
+        res? Object.keys(res).map( (key, index) => (
+          <p key={index}>{`${key} : ${res[key]}`}</p>
+        )) : <MsgBox msg="Please Sign in"/>
+      }
+
+      <p>Your information will not be save, this is for test purpose only...</p>
+
+      <h3>{res? "Your Log in." : "Your not log in."}</h3>
+
     </div>
   );
 }
 
 export default App;
+
+
+const MsgBox = ({msg})=> {
+  return(
+    <>
+      <h2>{msg}</h2>
+    </>
+  )
+}
