@@ -1,6 +1,6 @@
 {
   "name": "google-login",
-  "homepage": "nozky.github.io/google-login"
+  "homepage": "nozky.github.io/google-login",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
