@@ -3,9 +3,7 @@ import './App.css';
 import GoogleLogin from 'react-google-login'
 
 
-
 function App() {
-
  const [res, setRes] = useState(null)
  const [error, setError] = useState(null)
 
@@ -18,8 +16,6 @@ const responseGoogle =(response)=>{
     setRes( response.profileObj )
   }
 }
-
-console.log( res )
 
   return (
     <div className="App" >
@@ -52,6 +48,7 @@ console.log( res )
 export default App;
 
 
+// component
 const MsgBox = ({msg})=> {
   return(
     <>
