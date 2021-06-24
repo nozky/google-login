@@ -7,11 +7,16 @@ import GoogleLogin from 'react-google-login'
 function App() {
 
  const [res, setRes] = useState(null)
- const [btnState, setBtnState] = useState("off")
+ const [error, setError] = useState(null)
 
 // googleLogin callback
 const responseGoogle =(response)=>{
-  setRes( response.profileObj )
+  if( response.error){
+    setError(response.details)
+  }else{
+    console.log( response.profileObj )
+    setRes( response.profileObj )
+  }
 }
 
 console.log( res )
@@ -38,10 +43,8 @@ console.log( res )
       <p>Your information will not be save, this is for test purpose only...</p>
 
       <h3>{res? "Your Log in." : "Your not log in."}</h3>
-      <p>test button state: {btnState}</p>
-      <button onClick={()=> setBtnState("on")}>On</button>
-      <button onClick={()=> setBtnState("off")}>Off</button>
-
+      
+      {error && <h5 style={{color:"red"}}><span style={{color:"black"}}>ERROR:</span> {error && error}</h5>}
     </div>
   );
 }
